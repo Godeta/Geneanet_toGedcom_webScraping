@@ -128,7 +128,7 @@
         echo "url transmise : <a href=\"$url\">$url</a> <br/> <br/>";
 		
     // inclu la bibliothèque/le fichier php
-    include('simple_html_dom.php');
+    include('advanced_html_dom.php');
 	
 	//on prend le temps actuel
     $t=time();
