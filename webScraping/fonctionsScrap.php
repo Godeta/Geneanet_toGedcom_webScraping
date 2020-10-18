@@ -14,20 +14,11 @@ function scrapNom($html){
 
 function scrapSosa($html){
     $data=$html->find('.sosa > a','0');
-    if(existe($data)){
+    if(!empty($data)){
         return $data->innertext;
     }
     else{
         return $data;
     }
     return $data;
-}
-
-function existe($data){
-    if (empty($data)){
-        return false;
-    }
-    else{
-        return true;
-    }
 }
