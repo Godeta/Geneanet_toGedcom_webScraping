@@ -1,8 +1,11 @@
 <?php
 //infos personnelles profil
 define("DESCRIPTION","[valign] ul");
-define("DATES",'td li');
+define("DATES",'igojsd');
 define("EVENEMENTS",'.ligne_vie td');
+define("PRENOM",'#person-title > div > h1 > a:nth-child(2)');
+define("NOM",'#person-title > div > h1 > a:nth-child(3)');
+
 //famille du profil
 define("FAMILLE",'.page_max li a');
 define("FAMILLE_TEXTE",'.page_max .columns > ul > li a');
