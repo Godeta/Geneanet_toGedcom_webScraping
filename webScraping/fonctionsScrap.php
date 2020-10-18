@@ -18,7 +18,7 @@ function scrapNom($html){
 function scrapSosa($html){
     $data=$html->find('.sosa > a','0');
     if(!empty($data)){
-        return $data->outertext;
+        return $data->innertext;
     }
     return " Sosa vide";
 }
