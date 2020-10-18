@@ -5,6 +5,11 @@ include('advanced_html_dom.php');
 //on met toutes les balises pour le web scraping comme constantes dans dictionnaire
 include("dictionnaire.php");	
 
+function scrapTitle($html){
+    $title = $html->find('title', '0'); //trouve le titre retourne un array, 0 pour préciser qu'on ne prend que la première case
+    return $title->innertext ;
+}
+
 function scrapPrenom($html){
     $data=$html->find(PRENOM,'0')->innertext;
     return $data ;
@@ -64,7 +69,7 @@ function scrapEvent($html) {
 function scrapUnions($html) {
     $union = "";
     foreach ($html->find(UNIONS) as $uni) {
-        $union = $union."$uni->innertext </a> <br/>";
+        $union = $union."$uni->innertext \n";
     }
     if(!empty($union)) {
         return $union;
@@ -74,7 +79,7 @@ function scrapUnions($html) {
 
 function scrapAll($html) {
     return "\nNom : ".
-    scrapNom($html) ." Prenom :".
+    scrapNom($html) ." Prenom : ".
     scrapPrenom($html) . "\nParents : ".
     scrapParents($html). "\nDates : ".
     scrapDates($html). "\nDescription : ".
@@ -82,4 +87,26 @@ function scrapAll($html) {
     scrapEvent($html) . "\nUnions : ". 
     scrapUnions($html) . "\nSosa : " .
     scrapSosa($html);
+}
+
+function writeResult ($intro,$content) {
+     // partie écritures infos dans un fichier
+    // 1 : on ouvre le fichier en mode append
+    $monfichier = fopen('resultat.ged', 'a');
+    fseek($monfichier, 0); // On remet le curseur au début du fichier
+    $resulttext = "$intro $content";
+    fputs($monfichier, $resulttext); // On écrit notre texte dans le fichier
+    $monfichier = fopen('resultat.ged', 'r');
+    $first_line = "\n".fgets($monfichier) ."\n".fgets($monfichier)."\n".fgets($monfichier).fgets($monfichier); // On lit les 4 premières lignes (nombre de pages vues)
+    // On récupère et affiche les 4 premières lignes du fichier
+    echo "\nIl existe à présent un fichier 'resultat.ged' dans votre dossier, les 4 premières lignes sont :
+     $first_line"; 
+    
+    fclose($monfichier);
+}
+
+function writeAllResult ($html) {
+    //on efface le contenu du fichier
+    fopen('resultat.ged', 'w');
+    writeResult("Résultats du webscrapping de ".scrapTitle($html)." \n",scrapAll($html));
 }
