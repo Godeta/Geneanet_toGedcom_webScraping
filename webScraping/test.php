@@ -27,24 +27,13 @@ echo (scrapParents($html));
 writeResult("Résultat du scrapping du nom : ",scrapPrenom($html));
 
 // test de scrapping total d'une page
-var_dump($argv); //récupération d'un tableau d'arguments
-$url = 'https://gw.geneanet.org/gstutz?n=le+conquerant&oc=&p=guillaume';
-if(!empty($argv[1])) {
-$url = $argv[1];
-}
+
 echo ("\n Full scrapping :\n");
-try {
-$html = @file_get_html($url);
-}
-catch (Exception $e) {
-    $html = "error";
-    // ajout d'un lancé d'exception dans advanced html dom
-    // echo ("Exception attrapée !");
-}
-if ($html != "error") {
+$url = 'https://gw.geneanet.org/gstutz?n=le+conquerant&oc=&p=guillaume';
+$html = file_get_html($url);
 //récupère toutes les données de la page
 echo(scrapAll($html)); 
 //récupère et écrit toutes les données de la page dans resultat.ged 
 writeAllResult($html);
-}
-// execution en ligne de commande : php arg1 + nom du fichier
+
+// execution en ligne de commande : php + nom du fichier

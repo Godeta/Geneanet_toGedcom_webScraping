@@ -1,11 +1,18 @@
 # création d'une fenêtre et ajout d'un texte, quelques widgets basics : https://tkdocs.com/tutorial/widgets.html
 import tkinter as tk
-import os
+import os 
 url = ""
 
 def launchPHP(url):
     """Fonction permettant de lancer le fichier test.php en ligne de commande (nécessite d'avoir php dans le path) """
-    os.system('cd webScraping && php test.php '+url)
+    table = [url[i:i+40] for i in range(0, len(url), 40)]
+    # on sépare l'url tous les 40 caractères en plusieurs arguments car depuis le cmd un argument est limité à 43 chars
+    commande = 'cd webScraping && php execScrap.php '
+    for i in range(len(table)):
+        commande += ' '+table[i]
+        print(table[i])
+    os.system(commande)
+    print (url)
 
 def createWindow():
     """Fonction principale contenant la création de la fenêtre et ses intéractions """
