@@ -76,7 +76,7 @@ class AdvancedHtmlBase{
       case 'index': return $this->search('./preceding-sibling::*')->length + 1;
 
       /*
-      DOMNode::insertBefore — Adds a new child 
+      DOMNode::insertBefore ï¿½ Adds a new child 
       */
 
       // simple-html-dom junk methods
@@ -151,6 +151,8 @@ class AdvancedHtmlDom extends AdvancedHtmlBase{
   function __construct($html = null, $is_xml = false){
     $this->doc = $this;
     if($html) $this->load($html, $is_xml);
+    else {echo "Erreur chargement de l'url !";
+      throw new Exception( 'Something really gone wrong'); }
   }
 
   public function load($html, $is_xml = false){

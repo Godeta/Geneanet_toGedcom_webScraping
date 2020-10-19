@@ -89,6 +89,14 @@ function scrapAll($html) {
     scrapSosa($html);
 }
 
+function scrapLienPere($html) {
+
+}
+
+function scrapLienMere($html) {
+    
+}
+
 function writeResult ($intro,$content) {
      // partie écritures infos dans un fichier
     // 1 : on ouvre le fichier en mode append
