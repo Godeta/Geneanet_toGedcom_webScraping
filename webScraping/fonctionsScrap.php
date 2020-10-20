@@ -11,12 +11,26 @@ function scrapTitle($html){
 }
 
 function scrapPrenom($html){
-    $data=$html->find(PRENOM,'0')->innertext;
+    $data=$html->find(PRENOM,'0');
+    if(!empty($data)){
+        return $data->innertext;
+    }
+    else {
+        $prenom = explode(" ", scrapTitle($html));
+        return $prenom[1];
+    }
     return $data ;
 }
 
 function scrapNom($html){
-    $data=$html->find(NOM,'0')->innertext;
+    $data=$html->find(NOM,'0');
+    if(!empty($data)){
+        return $data->innertext;
+    }
+    else {
+        $nom = explode(" ", scrapTitle($html));
+        return $nom[0];
+    }
     return $data ;
 }
 
